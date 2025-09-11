@@ -1,0 +1,4 @@
+{
+	"$schema": "https://json.schemastore.org/lintstaged.json",
+	"**/*.{ts,tsx,js,jsx,cjs,mjs,json,md,css,scss,html,yml,yaml}": "biome format --write --files-ignore-unknown true"
+}

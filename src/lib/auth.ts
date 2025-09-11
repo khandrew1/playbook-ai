@@ -33,7 +33,7 @@ const fetchUserInfoFromYahoo = async (
 };
 
 export const auth = betterAuth({
-	database: new Database("db.sqlite"),
+	database: new Database("./src/db/db.sqlite"),
 	logger: {
 		level: "debug",
 	},
