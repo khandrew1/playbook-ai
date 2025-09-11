@@ -1,6 +1,9 @@
 
 # AGENTS.md — Tool Selection (TypeScript)
 
+If `ast-grep` is available, avoid `rg` or `grep` unless a plain-text search is explicitly requested.
+Use the ast-grep MCP server thats available to you.
+
 - Find files: `fd -e ts -e tsx -E .d.ts`
 - Find text: `rg`
 - Structured code search and codemods: `ast-grep`
@@ -19,7 +22,6 @@
   - JSON: `jq`
   - YAML/XML: `yq`
 
-If `ast-grep` is available, avoid `rg` or `grep` unless a plain-text search is explicitly requested.
 
 - Prefer `tsx` for fast Node execution:
 

@@ -4,7 +4,7 @@ import {
 	type OAuth2Tokens,
 	type OAuth2UserInfo,
 } from "better-auth";
-import { genericOAuth } from "better-auth/plugins";
+import { genericOAuth, mcp } from "better-auth/plugins";
 
 type YahooUserInfo = {
 	sub: string;
@@ -61,6 +61,9 @@ export const auth = betterAuth({
 					},
 				},
 			],
+		}),
+		mcp({
+			loginPage: "/sign-in",
 		}),
 	],
 });
