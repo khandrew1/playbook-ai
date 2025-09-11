@@ -18,7 +18,6 @@ export class YahooFantasyClient {
 		const { accessToken } = await this.auth.api.getAccessToken({
 			body: { providerId: "yahoo", userId: this.userId },
 		});
-		console.log("ACCESS TOKEN: ", accessToken);
 		return { Authorization: `Bearer ${accessToken}` };
 	}
 
