@@ -10,8 +10,8 @@ import { cors } from "hono/cors";
 import { z } from "zod";
 import type { AuthType } from "./lib/auth";
 import { auth } from "./lib/auth";
-import { YahooFantasyClient } from "./lib/yahoo/client";
-import { createMcpServer } from "./mcp";
+import { YahooFantasyClient } from "./lib/yahoo-client";
+import { createMcpServer } from "./lib/mcp";
 import withSession from "./middleware/with-session";
 import authRouter from "./routes/auth";
 
@@ -53,7 +53,7 @@ app.get("/.well-known/oauth-protected-resource", async (c) => {
 app.all("/mcp", async (c) => {
 	const handler = withMcpAuth(
 		auth,
-		async (req: Request, session: OAuthAccessToken) => {
+		async (_req: Request, session: OAuthAccessToken) => {
 			const userId = (session as any)?.userId || c.get("user")?.id || "";
 			const yahoo = new YahooFantasyClient(auth, userId);
 			const server = createMcpServer(yahoo);

@@ -1,6 +1,6 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-import { YahooFantasyClient } from "./lib/yahoo/client";
+import { YahooFantasyClient } from "./yahoo-client";
 
 export const createMcpServer = (yahoo: YahooFantasyClient) => {
 	const server = new McpServer({
