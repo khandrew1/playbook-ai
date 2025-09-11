@@ -49,6 +49,7 @@ export const auth = betterAuth({
 					discoveryUrl:
 						"https://api.login.yahoo.com/.well-known/openid-configuration",
 					scopes: ["openid", "email", "profile", "fspt-r"],
+					accessType: "offline",
 					getUserInfo: async (tokens): Promise<OAuth2UserInfo> => {
 						const userInfo = await fetchUserInfoFromYahoo(tokens);
 

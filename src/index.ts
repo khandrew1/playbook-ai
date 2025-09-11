@@ -1,10 +1,3 @@
-import { Hono } from "hono";
-import { cors } from "hono/cors";
-import type { AuthType } from "./lib/auth";
-import { auth } from "./lib/auth";
-import withSession from "./middleware/with-session";
-import authRouter from "./routes/auth";
-import server from "./mcp";
 import { StreamableHTTPTransport } from "@hono/mcp";
 import {
 	OAuthAccessToken,
@@ -12,6 +5,15 @@ import {
 	oAuthProtectedResourceMetadata,
 	withMcpAuth,
 } from "better-auth/plugins";
+import { Hono } from "hono";
+import { cors } from "hono/cors";
+import { z } from "zod";
+import type { AuthType } from "./lib/auth";
+import { auth } from "./lib/auth";
+import { YahooFantasyClient } from "./lib/yahoo/client";
+import { createMcpServer } from "./mcp";
+import withSession from "./middleware/with-session";
+import authRouter from "./routes/auth";
 
 const app = new Hono<{ Variables: AuthType }>({
 	strict: false,
@@ -52,6 +54,10 @@ app.all("/mcp", async (c) => {
 	const handler = withMcpAuth(
 		auth,
 		async (req: Request, session: OAuthAccessToken) => {
+			const userId = (session as any)?.userId || c.get("user")?.id || "";
+			const yahoo = new YahooFantasyClient(auth, userId);
+			const server = createMcpServer(yahoo);
+
 			const transport = new StreamableHTTPTransport();
 			await server.connect(transport);
 			return (await transport.handleRequest(c))!;
