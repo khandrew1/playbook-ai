@@ -6,7 +6,7 @@ import {
 	type OAuth2Tokens,
 	type OAuth2UserInfo,
 } from "better-auth";
-import { genericOAuth, mcp } from "better-auth/plugins";
+import { genericOAuth, mcp, apiKey } from "better-auth/plugins";
 
 type YahooUserInfo = {
 	sub: string;
@@ -50,6 +50,8 @@ export const auth = betterAuth({
 					tokenUrl: "https://api.login.yahoo.com/oauth2/get_token",
 					discoveryUrl:
 						"https://api.login.yahoo.com/.well-known/openid-configuration",
+					// ensure the redirect matches Yahoo app config exactly
+					redirectURI: `${process.env.BETTER_AUTH_URL || ""}/api/auth/oauth2/callback/yahoo`,
 					scopes: ["openid", "email", "profile", "fspt-r"],
 					accessType: "offline",
 					getUserInfo: async (tokens): Promise<OAuth2UserInfo> => {
@@ -68,6 +70,7 @@ export const auth = betterAuth({
 		mcp({
 			loginPage: "/sign-in",
 		}),
+		apiKey(),
 	],
 });
 

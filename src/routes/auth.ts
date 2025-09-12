@@ -2,28 +2,12 @@ import { Hono } from "hono";
 import { html } from "hono/html";
 import type { AuthType } from "../lib/auth.js";
 import { auth } from "../lib/auth.js";
-import {
-	oAuthDiscoveryMetadata,
-	oAuthProtectedResourceMetadata,
-} from "better-auth/plugins";
 
 const authRouter = new Hono<{ Variables: AuthType }>({
 	strict: false,
 });
 
 // Auth API passthrough
-authRouter.on(["POST", "GET"], "/api/auth/*", (c) => auth.handler(c.req.raw));
-
-// Well-known OAuth endpoints
-authRouter.get("/.well-known/oauth-authorization-server", async (c) => {
-	const handler = oAuthDiscoveryMetadata(auth);
-	return handler(c.req.raw);
-});
-
-authRouter.get("/.well-known/oauth-protected-resource", async (c) => {
-	const handler = oAuthProtectedResourceMetadata(auth);
-	return handler(c.req.raw);
-});
 
 authRouter.get("/sign-in", async (c) => {
 	const authUrlResult = await auth.api.signInWithOAuth2({
