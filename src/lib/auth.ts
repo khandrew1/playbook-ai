@@ -1,4 +1,6 @@
-import { Database } from "bun:sqlite";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { db } from "../db";
+import * as authSchema from "../db/schema";
 import {
 	betterAuth,
 	type OAuth2Tokens,
@@ -33,7 +35,7 @@ const fetchUserInfoFromYahoo = async (
 };
 
 export const auth = betterAuth({
-	database: new Database("./src/db/db.sqlite"),
+	database: drizzleAdapter(db, { provider: "pg", schema: authSchema }),
 	logger: {
 		level: "debug",
 	},
