@@ -54,7 +54,14 @@ authRouter.get("/dashboard", async (c) => {
                     <div>
                         ${
 													isLoggedIn
-														? html`<a href="/sign-out">Sign out</a>`
+														? html`
+                                                        <div style="display:flex; gap:12px; align-items:center;">
+                                                            <a href="/sign-out">Sign out</a>
+                                                            <form action="/api-key/create" method="post" style="display:inline;">
+                                                                <button type="submit">Create API Key</button>
+                                                            </form>
+                                                        </div>
+                                                    `
 														: html`<a href="/sign-in">Sign in with Yahoo</a>`
 												}
                     </div>

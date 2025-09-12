@@ -1,12 +1,12 @@
-import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { db } from "../db/index.js";
-import * as authSchema from "../db/schema.js";
 import {
 	betterAuth,
 	type OAuth2Tokens,
 	type OAuth2UserInfo,
 } from "better-auth";
-import { genericOAuth, mcp, apiKey } from "better-auth/plugins";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { apiKey, genericOAuth, mcp } from "better-auth/plugins";
+import { db } from "../db/index.js";
+import * as authSchema from "../db/schema.js";
 
 type YahooUserInfo = {
 	sub: string;
