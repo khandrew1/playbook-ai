@@ -1,10 +1,10 @@
 import { Hono } from "hono";
-import type { AuthType } from "../lib/auth";
-import { auth } from "../lib/auth";
+import type { AuthType } from "../lib/auth.js";
+import { auth } from "../lib/auth.js";
 import { OAuthAccessToken, withMcpAuth } from "better-auth/plugins";
 import { StreamableHTTPTransport } from "@hono/mcp";
-import { YahooFantasyClient } from "../lib/yahoo-client";
-import { createMcpServer } from "../lib/mcp";
+import { YahooFantasyClient } from "../lib/yahoo-client.js";
+import { createMcpServer } from "../lib/mcp.js";
 
 const mcpRouter = new Hono<{ Variables: AuthType }>({ strict: false });
 

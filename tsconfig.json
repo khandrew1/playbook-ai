@@ -3,7 +3,10 @@
 		"strict": true,
 		"jsx": "react-jsx",
 		"jsxImportSource": "hono/jsx",
-		"skipLibCheck": true
+		"skipLibCheck": true,
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"target": "ES2022"
 	},
 	"exclude": ["node_modules"]
 }

@@ -1,6 +1,6 @@
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { db } from "../db";
-import * as authSchema from "../db/schema";
+import { db } from "../db/index.js";
+import * as authSchema from "../db/schema.js";
 import {
 	betterAuth,
 	type OAuth2Tokens,

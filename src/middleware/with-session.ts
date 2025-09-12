@@ -1,5 +1,5 @@
 import type { MiddlewareHandler } from "hono";
-import { auth } from "../lib/auth";
+import { auth } from "../lib/auth.js";
 
 const withSession: MiddlewareHandler = async (c, next) => {
 	const session = await auth.api.getSession({ headers: c.req.raw.headers });

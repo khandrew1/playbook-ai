@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { html } from "hono/html";
-import type { AuthType } from "../lib/auth";
-import { auth } from "../lib/auth";
+import type { AuthType } from "../lib/auth.js";
+import { auth } from "../lib/auth.js";
 import {
 	oAuthDiscoveryMetadata,
 	oAuthProtectedResourceMetadata,

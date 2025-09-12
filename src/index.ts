@@ -1,8 +1,8 @@
 import { Hono } from "hono";
 import type { MiddlewareHandler } from "hono";
-import type { AuthType } from "./lib/auth";
-import withSession from "./middleware/with-session";
-import routes from "./routes";
+import type { AuthType } from "./lib/auth.js";
+import withSession from "./middleware/with-session.js";
+import routes from "./routes/index.js";
 
 const app = new Hono<{ Variables: AuthType }>({
 	strict: false,
