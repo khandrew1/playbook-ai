@@ -1,3 +1,7 @@
+# Playbook AI
+
+An MCP Server to interact with the Yahoo Fantasy Sports API.
+
 To install dependencies:
 ```sh
 bun install
