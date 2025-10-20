@@ -22,7 +22,10 @@ export const createMcpServer = (yahoo: YahooFantasyClient) => {
 				content: [
 					{ type: "text", text: JSON.stringify(structuredContent, null, 2) },
 				],
-				structuredContent,
+				structuredContent: {
+					fantasy_content: "YAHOO!",
+					leaugeInfo: "No-holds-bar",
+				},
 			};
 		},
 	);
