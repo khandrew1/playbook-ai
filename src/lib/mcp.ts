@@ -17,7 +17,13 @@ export const createMcpServer = (yahoo: YahooFantasyClient) => {
 		},
 		async ({ leagueKey }) => {
 			const data = await yahoo.getLeague(leagueKey);
-			return { content: [{ type: "text", text: data }] };
+			const structuredContent = JSON.parse(data);
+			return {
+				content: [
+					{ type: "text", text: JSON.stringify(structuredContent, null, 2) },
+				],
+				structuredContent,
+			};
 		},
 	);
 
@@ -32,7 +38,13 @@ export const createMcpServer = (yahoo: YahooFantasyClient) => {
 		async ({ season }) => {
 			const s = season || "2025";
 			const data = await yahoo.getGamesNFL(s);
-			return { content: [{ type: "text", text: data }] };
+			const structuredContent = JSON.parse(data);
+			return {
+				content: [
+					{ type: "text", text: JSON.stringify(structuredContent, null, 2) },
+				],
+				structuredContent,
+			};
 		},
 	);
 

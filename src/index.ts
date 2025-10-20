@@ -19,16 +19,11 @@ app.use(
 		origin: "*",
 		allowHeaders: ["Content-Type", "Authorization"],
 		allowMethods: ["POST", "GET", "OPTIONS"],
-		exposeHeaders: ["Content-Length"],
+		exposeHeaders: ["Content-Length", "WWW-Authenticate"],
 		maxAge: 600,
 		credentials: true,
 	}),
 );
-
-// middleware handler
-app.use("*", withSession);
-
-app.on(["POST", "GET"], "/api/auth/*", (c) => auth.handler(c.req.raw));
 
 app.get("/.well-known/oauth-authorization-server", async (c) => {
 	const handler = oAuthDiscoveryMetadata(auth);
@@ -39,6 +34,11 @@ app.get("/.well-known/oauth-protected-resource", async (c) => {
 	const handler = oAuthProtectedResourceMetadata(auth);
 	return handler(c.req.raw);
 });
+
+// middleware handler
+app.use("*", withSession);
+
+app.on(["POST", "GET"], "/api/auth/*", (c) => auth.handler(c.req.raw));
 
 app.route("/", routes);
 
